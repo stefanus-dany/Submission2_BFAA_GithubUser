@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">GithubUser</string>
+    <string name="label_name">%s</string>
+    <string name="label_username">\@%s</string>
+    <string name="label_following">Mengikuti : %s</string>
+    <string name="label_followers">Pengikut : %s</string>
+    <string name="label_repo">%s mempunyai %s repositories</string>
+    <string name="label_company">Perusahan : %s</string>
+    <string name="label_location">Lokasi : %s</string>
+    <string name="following">mengikuti</string>
+    <string name="followers">pengikut</string>
+    <string name="username_have_16_repositories">username mempunyai 16 repositories</string>
+    <string name="company_google">Perusahan : Google</string>
+    <string name="location_jakarta">Lokasi : Jakarta</string>
+    <string name="name">Name</string>
+    <string name="username">\@username</string>
+    <string name="tab_text_1">Mengikuti</string>
+    <string name="tab_text_2">Pengikut</string>
+    <string name="change_language_settings">Ubah Pengaturan Bahasa</string>
+    <string name="SearchLabel">Cari..</string>
+    <string name="not_found_label">Data tidak ditemukan</string>
+
+</resources>
