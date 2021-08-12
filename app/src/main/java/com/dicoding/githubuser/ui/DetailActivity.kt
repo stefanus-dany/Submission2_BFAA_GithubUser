@@ -6,9 +6,11 @@ import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.dicoding.githubuser.R
 import com.dicoding.githubuser.databinding.DetailActivityBinding
 import com.dicoding.githubuser.model.User
@@ -34,10 +36,7 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         val dataUser = intent.getParcelableExtra<User>(EXTRA_USER)
         if (dataUser != null) {
-            Glide
-                .with(this)
-                .load(dataUser.img)
-                .into(binding.img)
+            binding.img.loadImage(dataUser.img)
             if (dataUser.name.equals("null")) {
                 binding.name.text = resources.getString(R.string.not_found_label)
             } else {
@@ -120,4 +119,13 @@ class DetailActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.main_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
+    private fun ImageView.loadImage(url: String?) {
+        Glide.with(this.context)
+            .load(url)
+            .apply(RequestOptions().override(500, 500))
+            .centerCrop()
+            .into(this)
+    }
+
 }

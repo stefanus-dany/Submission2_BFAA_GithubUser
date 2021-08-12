@@ -3,8 +3,10 @@ package com.dicoding.githubuser.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.dicoding.githubuser.R
 import com.dicoding.githubuser.databinding.UserItemBinding
 import com.dicoding.githubuser.model.User
@@ -37,10 +39,7 @@ class UserAdapter(private val mContext: Context, onItemClickCallback: OnItemClic
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.username.text =
             holder.itemView.resources.getString(R.string.label_username, user[position].username)
-        Glide
-            .with(mContext)
-            .load(user[position].img)
-            .into(holder.binding.img)
+        holder.binding.img.loadImage(user[position].img)
         holder.itemView.setOnClickListener {
             mCallback.onItemClicked(user[position].username.toString())
         }
@@ -52,6 +51,14 @@ class UserAdapter(private val mContext: Context, onItemClickCallback: OnItemClic
 
     interface OnItemClickCallback {
         fun onItemClicked(login: String)
+    }
+
+    fun ImageView.loadImage(url: String?) {
+        Glide.with(this.context)
+            .load(url)
+            .apply(RequestOptions().override(500, 500))
+            .centerCrop()
+            .into(this)
     }
 
 }

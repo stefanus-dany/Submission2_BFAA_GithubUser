@@ -2,7 +2,9 @@ package com.dicoding.githubuser.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class User(
     var img: String? = "",
     var name: String? = "",
@@ -12,40 +14,4 @@ data class User(
     var company: String? = "",
     var location: String? = "",
     var repository: String? = ""
-) : Parcelable{
-    constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString()
-    )
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(img)
-        parcel.writeString(name)
-        parcel.writeString(username)
-        parcel.writeString(following)
-        parcel.writeString(followers)
-        parcel.writeString(company)
-        parcel.writeString(location)
-        parcel.writeString(repository)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<User> {
-        override fun createFromParcel(parcel: Parcel): User {
-            return User(parcel)
-        }
-
-        override fun newArray(size: Int): Array<User?> {
-            return arrayOfNulls(size)
-        }
-    }
-}
+) : Parcelable

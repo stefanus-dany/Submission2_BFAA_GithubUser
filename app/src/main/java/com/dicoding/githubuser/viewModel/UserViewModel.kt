@@ -8,6 +8,7 @@ import com.dicoding.githubuser.model.User
 import com.dicoding.githubuser.ui.MainActivity
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
+import com.dicoding.githubuser.BuildConfig
 import cz.msebera.android.httpclient.Header
 import org.json.JSONArray
 import org.json.JSONObject
@@ -23,7 +24,7 @@ class UserViewModel : ViewModel() {
         val dataUser = mutableListOf<User>()
 
         val client = AsyncHttpClient()
-        client.addHeader("Authorization", "token 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")
+        client.addHeader("Authorization", "token ${BuildConfig.GITHUB_TOKEN}")
         client.addHeader("User-Agent", "request")
         val url = "https://api.github.com/users"
         client.get(url, object : AsyncHttpResponseHandler() {
@@ -71,7 +72,7 @@ class UserViewModel : ViewModel() {
         val dataUser = mutableListOf<User>()
 
         val client = AsyncHttpClient()
-        client.addHeader("Authorization", "token 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")
+        client.addHeader("Authorization", "token ${BuildConfig.GITHUB_TOKEN}")
         client.addHeader("User-Agent", "request")
         val url = "https://api.github.com/search/users?q=$username"
         Log.i("cek", "getDataSearchFromAPI: $url")
@@ -125,7 +126,7 @@ class UserViewModel : ViewModel() {
         val data = MutableLiveData<User>()
 
         val client = AsyncHttpClient()
-        client.addHeader("Authorization", "token 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")
+        client.addHeader("Authorization", "token ${BuildConfig.GITHUB_TOKEN}")
         client.addHeader("User-Agent", "request")
         val url = "https://api.github.com/users/$login"
         Log.i("cek", "getDataSearchFromAPI: $url")
@@ -185,7 +186,7 @@ class UserViewModel : ViewModel() {
         val dataUser = mutableListOf<User>()
 
         val client = AsyncHttpClient()
-        client.addHeader("Authorization", "token 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")
+        client.addHeader("Authorization", "token ${BuildConfig.GITHUB_TOKEN}")
         client.addHeader("User-Agent", "request")
         val url = "https://api.github.com/users/$username/following"
         Log.i("cek", "getDataSearchFromAPI: $url")
@@ -237,7 +238,7 @@ class UserViewModel : ViewModel() {
         val dataUser = mutableListOf<User>()
 
         val client = AsyncHttpClient()
-        client.addHeader("Authorization", "token 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")
+        client.addHeader("Authorization", "token ${BuildConfig.GITHUB_TOKEN}")
         client.addHeader("User-Agent", "request")
         val url = "https://api.github.com/users/$username/followers"
         Log.i("cek", "getDataSearchFromAPI: $url")
