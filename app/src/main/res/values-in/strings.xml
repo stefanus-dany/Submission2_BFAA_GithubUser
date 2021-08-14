@@ -20,5 +20,6 @@
     <string name="change_language_settings">Ubah Pengaturan Bahasa</string>
     <string name="SearchLabel">Cari..</string>
     <string name="not_found_label">Data tidak ditemukan</string>
+    <string name="label_favorite">Favorit Anda</string>
 
 </resources>

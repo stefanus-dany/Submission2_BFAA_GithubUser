@@ -2,7 +2,10 @@ package com.dicoding.githubuser.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +14,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dicoding.githubuser.R
 import com.dicoding.githubuser.adapter.UserAdapter
 import com.dicoding.githubuser.databinding.ActivityMainBinding
 import com.dicoding.githubuser.model.User
@@ -33,6 +37,8 @@ class MainActivity : AppCompatActivity(), UserAdapter.OnItemClickCallback {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.elevation = 0f
+        setSupportActionBar(binding.toolbar)
         data = mutableListOf()
         viewModel = ViewModelProvider(
             this,
@@ -129,6 +135,26 @@ class MainActivity : AppCompatActivity(), UserAdapter.OnItemClickCallback {
                 startActivity(intent)
             }
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_change_settings -> {
+                val mIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+                startActivity(mIntent)
+            }
+
+            R.id.action_favorite -> {
+                val mIntent = Intent(this, FavoriteActivity::class.java)
+                startActivity(mIntent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

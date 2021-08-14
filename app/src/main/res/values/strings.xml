@@ -21,5 +21,6 @@
     <string name="change_language_settings">Change Language Settings</string>
     <string name="SearchLabel">Search..</string>
     <string name="not_found_label">Data not found</string>
+    <string name="label_favorite">Your Favorite</string>
 
 </resources>
