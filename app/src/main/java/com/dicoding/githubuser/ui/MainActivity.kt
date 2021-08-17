@@ -18,6 +18,7 @@ import com.dicoding.githubuser.R
 import com.dicoding.githubuser.adapter.UserAdapter
 import com.dicoding.githubuser.databinding.ActivityMainBinding
 import com.dicoding.githubuser.model.User
+import com.dicoding.githubuser.settings.MyPreferenceFragment
 import com.dicoding.githubuser.viewModel.UserViewModel
 import java.util.*
 
@@ -139,8 +140,8 @@ class MainActivity : AppCompatActivity(), UserAdapter.OnItemClickCallback {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_change_settings -> {
-                val mIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+            R.id.settings -> {
+                val mIntent = Intent(this, SettingsActivity::class.java)
                 startActivity(mIntent)
             }
 

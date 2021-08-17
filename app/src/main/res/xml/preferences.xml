@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:iconSpaceReserved="false">
+
+    <PreferenceCategory
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="@string/settings">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/key_reminder"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="@string/summary_reminder"
+            android:title="@string/title_reminder" />
+
+        <PreferenceScreen
+            android:key="@string/key_change_language"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="@string/summary_change_language"
+            android:title="@string/title_change_language" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

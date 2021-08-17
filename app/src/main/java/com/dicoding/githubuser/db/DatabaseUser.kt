@@ -1,8 +1,12 @@
 package com.dicoding.githubuser.db
 
+import android.net.Uri
 import android.provider.BaseColumns
 
-internal class DatabaseUser {
+object DatabaseUser {
+
+    const val AUTHORITY = "com.dicoding.githubuser"
+    const val SCHEME = "content"
 
     internal class UserColumns : BaseColumns {
         companion object {
@@ -15,6 +19,12 @@ internal class DatabaseUser {
             const val COMPANY = "company"
             const val LOCATION = "location"
             const val REPOSITORY = "repository"
+
+            // untuk membuat URI content://com.dicoding.picodiploma.mynotesapp/note
+            val CONTENT_URI: Uri = Uri.Builder().scheme(SCHEME)
+                .authority(AUTHORITY)
+                .appendPath(TABLE_NAME)
+                .build()
         }
     }
 }

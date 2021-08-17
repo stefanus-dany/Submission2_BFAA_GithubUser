@@ -19,7 +19,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField 'String', 'GITHUB_TOKEN', '"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"'
+        buildConfigField 'String', 'GITHUB_TOKEN', '"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"'
     }
 
     buildTypes {
@@ -52,6 +52,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.preference:preference-ktx:1.1.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

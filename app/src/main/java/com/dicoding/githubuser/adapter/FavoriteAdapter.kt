@@ -1,6 +1,7 @@
 package com.dicoding.githubuser.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -11,8 +12,9 @@ import com.dicoding.githubuser.R
 import com.dicoding.githubuser.databinding.UserItemBinding
 import com.dicoding.githubuser.model.User
 
-class FavoriteAdapter(private val mContext: Context) :
+class FavoriteAdapter(private val mContext: Context, onItemClickCallback: OnItemClickCallback) :
     RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
+    private val mCallback = onItemClickCallback
 
     var listUser = ArrayList<User>()
         set(listUser) {
@@ -40,24 +42,18 @@ class FavoriteAdapter(private val mContext: Context) :
         username.text =
             holder.itemView.resources.getString(R.string.label_username, listUser[position].username)
         img.loadImage(listUser[position].img)}
+        Log.i("cekIMG", "listUser image: ${listUser[position].img})")
+        holder.itemView.setOnClickListener {
+            mCallback.onItemClicked(listUser[position].username.toString())
+        }
     }
 
     override fun getItemCount(): Int {
         return listUser.size
     }
 
-//    fun addItem(user: User) {
-//        this.listUser.add(user)
-//        notifyItemInserted(this.listUser.size - 1)
-//    }
-//    fun updateItem(position: Int, user: User) {
-//        this.listUser[position] = user
-//        notifyItemChanged(position, user)
-//    }
-    fun removeItem(position: Int) {
-        this.listUser.removeAt(position)
-        notifyItemRemoved(position)
-        notifyItemRangeChanged(position, this.listUser.size)
+    interface OnItemClickCallback {
+        fun onItemClicked(login: String)
     }
 
     private fun ImageView.loadImage(url: String?) {

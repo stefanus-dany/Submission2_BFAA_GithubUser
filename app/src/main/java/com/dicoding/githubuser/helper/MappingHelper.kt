@@ -35,4 +35,32 @@ object MappingHelper {
         }
         return notesList
     }
+
+    fun mapCursorToObject(notesCursor: Cursor?): User {
+        var user = User()
+        notesCursor?.apply {
+            moveToFirst()
+            val img = getString(getColumnIndexOrThrow(DatabaseUser.UserColumns.IMG))
+            val name = getString(getColumnIndexOrThrow(DatabaseUser.UserColumns.NAME))
+            val username = getString(getColumnIndexOrThrow(DatabaseUser.UserColumns._USERNAME))
+            val following = getString(getColumnIndexOrThrow(DatabaseUser.UserColumns.FOLLOWING))
+            val followers = getString(getColumnIndexOrThrow(DatabaseUser.UserColumns.FOLLOWERS))
+            val company = getString(getColumnIndexOrThrow(DatabaseUser.UserColumns.COMPANY))
+            val location = getString(getColumnIndexOrThrow(DatabaseUser.UserColumns.LOCATION))
+            val repository =
+                getString(getColumnIndexOrThrow(DatabaseUser.UserColumns.REPOSITORY))
+            user =
+                User(
+                    img = img,
+                    name = name,
+                    username = username,
+                    following = following,
+                    followers = followers,
+                    company = company,
+                    location = location,
+                    repository = repository
+                )
+        }
+        return user
+    }
 }

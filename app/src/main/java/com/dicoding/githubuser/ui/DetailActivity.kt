@@ -1,6 +1,7 @@
 package com.dicoding.githubuser.ui
 
 import android.content.ContentValues
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.dicoding.githubuser.R
 import com.dicoding.githubuser.databinding.DetailActivityBinding
 import com.dicoding.githubuser.db.DatabaseUser
+import com.dicoding.githubuser.db.DatabaseUser.UserColumns.Companion.CONTENT_URI
 import com.dicoding.githubuser.db.FavoriteHelper
 import com.dicoding.githubuser.helper.MappingHelper
 import com.dicoding.githubuser.model.User
@@ -24,6 +26,8 @@ class DetailActivity : AppCompatActivity() {
     private var isFavorit = false
     private lateinit var favoriteHelper: FavoriteHelper
     private lateinit var values: ContentValues
+    private lateinit var uriWithId: Uri
+    private var dataUser: User? = null
 
     companion object {
         const val EXTRA_USER = "extra_user"
@@ -44,7 +48,7 @@ class DetailActivity : AppCompatActivity() {
         favoriteHelper = FavoriteHelper.getInstance(applicationContext)
         favoriteHelper.open()
         values = ContentValues()
-        val dataUser = intent.getParcelableExtra<User>(EXTRA_USER)
+        var dataUser = intent.getParcelableExtra<User>(EXTRA_USER)
         if (dataUser != null) {
             binding.img.loadImage(dataUser.img)
             if (dataUser.name.equals("null")) {
@@ -127,6 +131,13 @@ class DetailActivity : AppCompatActivity() {
         loadUsernameAsync(dataUser)
         Log.i("cueks", "isFavorite after load: $isFavorit")
 
+        uriWithId = Uri.parse(CONTENT_URI.toString() + "/" + dataUser?.username)
+        val cursor = contentResolver.query(uriWithId, null, null, null, null)
+        if (cursor != null) {
+            dataUser = MappingHelper.mapCursorToObject(cursor)
+            cursor.close()
+        }
+
         binding.icFav.setOnClickListener {
             if (!isFavorit) {
                 isFavorit = true
@@ -134,13 +145,15 @@ class DetailActivity : AppCompatActivity() {
                     this,
                     R.drawable.ic_favorite_enabled
                 )
-                favoriteHelper.insert(values)
+//                favoriteHelper.insert(values)
+                contentResolver.insert(CONTENT_URI, values)
             } else {
                 isFavorit = false
                 binding.icFav.background = ContextCompat.getDrawable(
                     this,
                     R.drawable.ic_favorite_disable
                 )
+//                contentResolver.delete(uriWithId, null, null)
                 favoriteHelper.deleteByUsername(dataUser?.username.toString())
             }
 
@@ -156,7 +169,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     @DelicateCoroutinesApi
-    private fun loadUsernameAsync(dataUser : User?){
+    private fun loadUsernameAsync(dataUser: User?) {
         GlobalScope.launch(Dispatchers.Main) {
             val deferredNotes = async(Dispatchers.IO) {
                 val cursor = favoriteHelper.queryByUsername(dataUser?.username.toString())

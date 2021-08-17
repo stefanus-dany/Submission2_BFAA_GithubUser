@@ -53,7 +53,7 @@ class UserAdapter(private val mContext: Context, onItemClickCallback: OnItemClic
         fun onItemClicked(login: String)
     }
 
-    fun ImageView.loadImage(url: String?) {
+    private fun ImageView.loadImage(url: String?) {
         Glide.with(this.context)
             .load(url)
             .apply(RequestOptions().override(500, 500))
