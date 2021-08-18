@@ -1,6 +1,5 @@
 package com.dicoding.githubuser.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -11,7 +10,7 @@ import com.dicoding.githubuser.R
 import com.dicoding.githubuser.databinding.UserItemBinding
 import com.dicoding.githubuser.model.User
 
-class FollowersAdapter(private val mContext : Context) : RecyclerView.Adapter<FollowersAdapter.ViewHolder>() {
+class FollowersAdapter : RecyclerView.Adapter<FollowersAdapter.ViewHolder>() {
 
     private val user = ArrayList<User>()
 

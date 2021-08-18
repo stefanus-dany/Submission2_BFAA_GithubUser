@@ -10,7 +10,7 @@ object DatabaseUser {
 
     internal class UserColumns : BaseColumns {
         companion object {
-            const val TABLE_NAME = "user"
+            private const val TABLE_NAME = "user"
             const val IMG = "img"
             const val NAME = "name"
             const val _USERNAME = "_username"

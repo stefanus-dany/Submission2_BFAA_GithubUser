@@ -2,7 +2,6 @@ package com.dicoding.githubuser.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -18,7 +17,6 @@ import com.dicoding.githubuser.R
 import com.dicoding.githubuser.adapter.UserAdapter
 import com.dicoding.githubuser.databinding.ActivityMainBinding
 import com.dicoding.githubuser.model.User
-import com.dicoding.githubuser.settings.MyPreferenceFragment
 import com.dicoding.githubuser.viewModel.UserViewModel
 import java.util.*
 
@@ -60,7 +58,7 @@ class MainActivity : AppCompatActivity(), UserAdapter.OnItemClickCallback {
         binding.progressBar.visibility = View.VISIBLE
         viewModel.getDataFromAPI().observe(this@MainActivity, {
             data = it
-            userAdapter = UserAdapter(this@MainActivity, this)
+            userAdapter = UserAdapter(this)
             userAdapter.setData(data)
             binding.rv.adapter = userAdapter
             binding.rv.layoutManager = LinearLayoutManager(this@MainActivity)

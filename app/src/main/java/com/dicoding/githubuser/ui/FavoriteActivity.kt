@@ -17,7 +17,6 @@ import com.dicoding.githubuser.databinding.ActivityFavoriteBinding
 import com.dicoding.githubuser.db.DatabaseUser.UserColumns.Companion.CONTENT_URI
 import com.dicoding.githubuser.db.FavoriteHelper
 import com.dicoding.githubuser.helper.MappingHelper
-import com.dicoding.githubuser.model.User
 import com.dicoding.githubuser.viewModel.UserViewModel
 import kotlinx.coroutines.*
 
@@ -41,18 +40,9 @@ class FavoriteActivity : AppCompatActivity(), FavoriteAdapter.OnItemClickCallbac
             this,
             ViewModelProvider.NewInstanceFactory()
         )[UserViewModel()::class.java]
-        adapter = FavoriteAdapter(this, this)
+        adapter = FavoriteAdapter(this)
         binding.rvFavorite.adapter = adapter
         binding.rvFavorite.layoutManager = LinearLayoutManager(this)
-        if (savedInstanceState == null) {
-            // proses ambil data
-            loadUserAsync()
-        } else {
-            val list = savedInstanceState.getParcelableArrayList<User>(EXTRA_STATE)
-            if (list != null) {
-                adapter.listUser = list
-            }
-        }
         binding.btnBack.setOnClickListener {
             finish()
         }
@@ -71,6 +61,12 @@ class FavoriteActivity : AppCompatActivity(), FavoriteAdapter.OnItemClickCallbac
     }
 
     @DelicateCoroutinesApi
+    override fun onResume() {
+        super.onResume()
+        loadUserAsync()
+    }
+
+    @DelicateCoroutinesApi
     private fun loadUserAsync() {
         GlobalScope.launch(Dispatchers.Main) {
             binding.progressBar.visibility = View.VISIBLE
@@ -84,9 +80,11 @@ class FavoriteActivity : AppCompatActivity(), FavoriteAdapter.OnItemClickCallbac
             binding.progressBar.visibility = View.GONE
             val user = deferredUser.await()
             if (user.size > 0) {
+                binding.rvFavorite.visibility = View.VISIBLE
                 adapter.listUser = user
                 binding.dataNotFound.visibility = View.GONE
             } else {
+                binding.rvFavorite.visibility = View.GONE
                 adapter.listUser = ArrayList()
                 binding.dataNotFound.visibility = View.VISIBLE
             }

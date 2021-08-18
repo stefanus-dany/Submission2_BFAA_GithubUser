@@ -50,7 +50,7 @@ class ListFollowersFragment : Fragment() {
             } else {
                 binding.dataNotFound.visibility = View.GONE
                 data = it
-                adapter = FollowersAdapter(requireContext())
+                adapter = FollowersAdapter()
                 adapter.setData(data)
                 with(binding) {
                     rvFollowers.adapter = adapter

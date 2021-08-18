@@ -1,6 +1,5 @@
 package com.dicoding.githubuser.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -11,7 +10,7 @@ import com.dicoding.githubuser.R
 import com.dicoding.githubuser.databinding.UserItemBinding
 import com.dicoding.githubuser.model.User
 
-class UserAdapter(private val mContext: Context, onItemClickCallback: OnItemClickCallback) :
+class UserAdapter(onItemClickCallback: OnItemClickCallback) :
     RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
     private val mCallback = onItemClickCallback

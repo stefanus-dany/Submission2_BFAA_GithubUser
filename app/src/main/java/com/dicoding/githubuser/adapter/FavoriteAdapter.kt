@@ -1,6 +1,5 @@
 package com.dicoding.githubuser.adapter
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,7 +11,7 @@ import com.dicoding.githubuser.R
 import com.dicoding.githubuser.databinding.UserItemBinding
 import com.dicoding.githubuser.model.User
 
-class FavoriteAdapter(private val mContext: Context, onItemClickCallback: OnItemClickCallback) :
+class FavoriteAdapter(onItemClickCallback: OnItemClickCallback) :
     RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
     private val mCallback = onItemClickCallback
 

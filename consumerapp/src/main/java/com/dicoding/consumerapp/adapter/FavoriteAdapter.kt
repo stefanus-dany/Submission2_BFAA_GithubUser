@@ -11,7 +11,7 @@ import com.dicoding.consumerapp.R
 import com.dicoding.consumerapp.databinding.UserItemBinding
 import com.dicoding.consumerapp.model.User
 
-class FavoriteAdapter() :
+class FavoriteAdapter :
     RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
     var listUser = ArrayList<User>()

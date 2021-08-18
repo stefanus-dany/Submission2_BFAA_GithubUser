@@ -27,7 +27,6 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var favoriteHelper: FavoriteHelper
     private lateinit var values: ContentValues
     private lateinit var uriWithId: Uri
-    private var dataUser: User? = null
 
     companion object {
         const val EXTRA_USER = "extra_user"

@@ -12,7 +12,6 @@ import com.dicoding.consumerapp.adapter.FavoriteAdapter
 import com.dicoding.consumerapp.databinding.ActivityFavoriteBinding
 import com.dicoding.consumerapp.db.DatabaseUser.UserColumns.Companion.CONTENT_URI
 import com.dicoding.consumerapp.helper.MappingHelper
-import com.dicoding.consumerapp.model.User
 import kotlinx.coroutines.*
 
 class FavoriteActivity : AppCompatActivity() {
@@ -32,15 +31,6 @@ class FavoriteActivity : AppCompatActivity() {
         adapter = FavoriteAdapter()
         binding.rvFavorite.adapter = adapter
         binding.rvFavorite.layoutManager = LinearLayoutManager(this)
-        if (savedInstanceState == null) {
-            // proses ambil data
-            loadUserAsync()
-        } else {
-            val list = savedInstanceState.getParcelableArrayList<User>(EXTRA_STATE)
-            if (list != null) {
-                adapter.listUser = list
-            }
-        }
 
         val handlerThread = HandlerThread("DataObserver")
         handlerThread.start()
@@ -53,6 +43,12 @@ class FavoriteActivity : AppCompatActivity() {
         }
         contentResolver.registerContentObserver(CONTENT_URI, true, myObserver)
 
+    }
+
+    @DelicateCoroutinesApi
+    override fun onResume() {
+        super.onResume()
+        loadUserAsync()
     }
 
     @DelicateCoroutinesApi
